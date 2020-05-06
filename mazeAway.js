@@ -10,8 +10,14 @@ const engine = Engine.create();
 const {
   world
 } = engine;
+
+
 const width = 600;
 const height = 600;
+const cells = 5;
+
+
+
 const render = Render.create({
   element: document.body,
   engine: engine,
@@ -57,9 +63,9 @@ World.add(world, borderWalls);
 grid = Array() <- The number inside the parenthesis is the number of rows for the grid
 map(()=> Array().fill()) <- The number inside the call back function Array parenthesis is the number of columns */
 
-const grid = Array(3).fill(null).map(() => Array(3).fill(false));
+const grid = Array(cells).fill(null).map(() => Array(cells).fill(false));
 
-const verticals = Array(3).fill(null).map(() => Array(2).fill(false));
+const verticals = Array(cells).fill(null).map(() => Array(cells - 1).fill(false));
 
-const horizontals = Array(2).fill(null).map(() => Array(3).fill(false));
-console.log(verticals);
+const horizontals = Array(cells - 1).fill(null).map(() => Array(cells).fill(false));
+console.log(grid);
