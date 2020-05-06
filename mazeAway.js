@@ -52,3 +52,11 @@ const borderWalls = [
 ];
 
 World.add(world, borderWalls);
+
+/* Maze Generation 
+grid = Array() <- The number inside the parenthesis is the number of rows for the grid
+map(()=> Array().fill()) <- The number inside the call back function Array parenthesis is the number of columns */
+
+const grid = Array(3).fill(null).map(() => Array(3).fill(false));
+
+console.log(grid)
