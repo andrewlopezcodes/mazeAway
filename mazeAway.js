@@ -99,7 +99,7 @@ const stepThroughCell = (row, column) => {
 
   //assemble randomly ordered list of neighbors
 
-  const neighbors = shuffleArrayNeighbors([
+  const availableMoves = shuffleArrayNeighbors([
     [row - 1, column, 'up'], //up
     [row, column + 1, 'right'], //right
     [row + 1, column, 'down'], //down
@@ -111,7 +111,7 @@ const stepThroughCell = (row, column) => {
     const [nextRow, nextColumn, directionOfMove] = move;
 
     //see if that neightbor is out of bounds
-    if (netRow < 0 || nextRow >= cells || nextColumn < 0 || nextColumn >= cells) {
+    if (nextRow < 0 || nextRow >= cells || nextColumn < 0 || nextColumn >= cells) {
       continue;
     }
 
@@ -119,16 +119,30 @@ const stepThroughCell = (row, column) => {
     if (grid[nextRow][nextColumn] === true) {
       continue;
     }
+
+    // remove a wall from verticals array
+    if (directionOfMove === 'left') {
+      verticals[row][column - 1] = true;
+    } else if (directionOfMove === 'right') {
+      verticals[row][column] = true;
+    }
+
+    // remove a wall from horizontals array
+    if (directionOfMove === 'up') {
+      horizontals[row - 1][column] = true;
+    } else if (directionOfMove === 'down') {
+      horizontals[row][column] = true;
+    }
   }
 
 
 
 
-  // remove a wall from either horizontals or verticals array
+
   //visit the next cell
 
 }
 
-stepThroughCell(startRow, startColumn);
-
+stepThroughCell(startRow, StartColumn);
 console.log(grid);
+console.log(horizontals);
