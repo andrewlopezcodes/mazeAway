@@ -4,6 +4,7 @@ const {
   Runner,
   World,
   Bodies,
+  Body
 } = Matter;
 
 const engine = Engine.create();
@@ -201,16 +202,36 @@ const ball = Bodies.circle(
 World.add(world, ball);
 
 document.addEventListener('keydown', event => {
+  const {
+    x,
+    y
+  } = ball.velocity;
   if (event.keyCode === 38 || event.keyCode === 87) {
+    Body.setVelocity(ball, {
+      x: x,
+      y: y - 5
+    });
     console.log('up'); //w
   }
   if (event.keyCode === 40 || event.keyCode === 90) {
+    Body.setVelocity(ball, {
+      x: x,
+      y: y + 5
+    });
     console.log('down'); //z
   }
   if (event.keyCode === 39 || event.keyCode === 83) {
+    Body.setVelocity(ball, {
+      x: x + 5,
+      y: y
+    });
     console.log('right'); //s
   }
   if (event.keyCode === 37 || event.keyCode === 65) {
+    Body.setVelocity(ball, {
+      x: x - 5,
+      y: y
+    });
     console.log('left'); //a
   }
 })
