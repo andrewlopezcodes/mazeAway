@@ -14,8 +14,8 @@ const {
   world
 } = engine;
 
-const cellsHorizontal = 3;
-const cellsVertical = 3;
+const cellsHorizontal = 20;
+const cellsVertical = 15;
 const width = window.innerWidth;
 const height = window.innerHeight;
 const unitLengthX = width / cellsHorizontal;
@@ -270,6 +270,10 @@ Events.on(engine, 'collisionStart', event => {
 
     if (labels.includes(collision.bodyA.label) && labels.includes(collision.bodyB.label)) {
       document.querySelector('.winner').classList.remove('hidden');
+      const button = document.querySelector('p');
+      button.addEventListener('click', event => {
+        location.reload();
+      })
       world.gravity.y = 1;
       world.bodies.forEach(body => {
         if (body.label === 'vertical wall' || body.label === 'horizontal wall') {
@@ -277,7 +281,6 @@ Events.on(engine, 'collisionStart', event => {
 
         }
       });
-
     }
   });
 });
