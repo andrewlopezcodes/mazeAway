@@ -4,10 +4,12 @@ const {
   Runner,
   World,
   Bodies,
-  Body
+  Body,
+  Events
 } = Matter;
 
 const engine = Engine.create();
+// engine.world.gravity.y = 0; // <- removes gravity from maze
 const {
   world
 } = engine;
@@ -15,7 +17,7 @@ const {
 
 const width = 600;
 const height = 600;
-const cells = 10;
+const cells = 3;
 const unitLength = width / cells;
 
 
@@ -24,7 +26,7 @@ const render = Render.create({
   element: document.body,
   engine: engine,
   options: {
-    wireframes: false,
+    wireframes: true,
     width,
     height
   }
@@ -152,7 +154,7 @@ horizontals.forEach((row, rowIndex) => {
       columnIndex * unitLength + unitLength / 2,
       rowIndex * unitLength + unitLength,
       unitLength,
-      unitLength * .01, {
+      unitLength * .1, {
         isStatic: true
       }
     );
@@ -169,7 +171,7 @@ verticals.forEach((row, rowIndex) => {
     const wall = Bodies.rectangle(
       columnIndex * unitLength + unitLength,
       rowIndex * unitLength + unitLength / 2,
-      unitLength * 0.01,
+      unitLength * 0.1,
       unitLength, {
         isStatic: true
       }
@@ -185,6 +187,7 @@ const goal = Bodies.rectangle(
   height - unitLength / 2,
   unitLength * .5,
   unitLength * .5, {
+    label: 'goal',
     isStatic: true
   }
 );
@@ -195,7 +198,9 @@ World.add(world, goal)
 const ball = Bodies.circle(
   unitLength / 2,
   unitLength / 2,
-  unitLength / 8,
+  unitLength / 8, {
+    label: 'ball'
+  }
 
 );
 
@@ -234,4 +239,16 @@ document.addEventListener('keydown', event => {
     });
     console.log('left'); //a
   }
-})
+});
+
+//Winning Scenario
+
+Events.on(engine, 'collisionStart', event => {
+  event.pairs.forEach(collision => {
+    const labels = ['ball', 'goal'];
+
+    if (labels.includes(collision.bodyA.label) && labels.includes(collision.bodyB.label)) {
+      console.log('User won!');
+    }
+  });
+});
