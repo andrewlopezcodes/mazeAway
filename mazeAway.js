@@ -14,7 +14,7 @@ const {
 
 const width = 600;
 const height = 600;
-const cells = 3;
+const cells = 10;
 const unitLength = width / cells;
 
 
@@ -44,16 +44,16 @@ World.add(world, shape);
 
 const borderWalls = [
 
-  Bodies.rectangle(width * 0.5, 0, width, 40, {
+  Bodies.rectangle(width * 0.5, 0, width, 2, {
     isStatic: true
   }),
-  Bodies.rectangle(width * 0.5, height, width, 40, {
+  Bodies.rectangle(width * 0.5, height, width, 2, {
     isStatic: true
   }),
-  Bodies.rectangle(0, height * 0.5, 40, height, {
+  Bodies.rectangle(0, height * 0.5, 2, height, {
     isStatic: true
   }),
-  Bodies.rectangle(width, height * 0.5, 40, height, {
+  Bodies.rectangle(width, height * 0.5, 2, height, {
     isStatic: true
   }),
 ];
@@ -183,3 +183,13 @@ verticals.forEach((row, rowIndex) => {
     World.add(world, wall);
   });
 });
+
+const goal = Bodies.rectangle(
+  width - unitLength / 2,
+  height - unitLength / 2,
+  unitLength * .5,
+  unitLength * .5, {
+    isStatic: true
+  }
+);
+World.add(world, goal)
