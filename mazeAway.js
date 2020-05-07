@@ -184,6 +184,8 @@ verticals.forEach((row, rowIndex) => {
   });
 });
 
+// Goal Section
+
 const goal = Bodies.rectangle(
   width - unitLength / 2,
   height - unitLength / 2,
@@ -193,3 +195,14 @@ const goal = Bodies.rectangle(
   }
 );
 World.add(world, goal)
+
+// Ball section
+
+const ball = Bodies.circle(
+  unitLength / 2,
+  unitLength / 2,
+  unitLength / 8,
+
+);
+
+World.add(world, ball)
