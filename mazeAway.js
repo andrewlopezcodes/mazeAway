@@ -17,7 +17,7 @@ const {
 
 const width = 600;
 const height = 600;
-const cells = 3;
+const cells = 10;
 const unitLength = width / cells;
 
 
@@ -41,15 +41,19 @@ Runner.run(Runner.create(), engine);
 const borderWalls = [
 
   Bodies.rectangle(width * 0.5, 0, width, 2, {
+    label: 'border wall top',
     isStatic: true
   }),
   Bodies.rectangle(width * 0.5, height, width, 2, {
+    label: 'border wall bottom',
     isStatic: true
   }),
   Bodies.rectangle(0, height * 0.5, 2, height, {
+    label: 'border wall left',
     isStatic: true
   }),
   Bodies.rectangle(width, height * 0.5, 2, height, {
+    label: 'border wall right',
     isStatic: true
   }),
 ];
@@ -155,6 +159,7 @@ horizontals.forEach((row, rowIndex) => {
       rowIndex * unitLength + unitLength,
       unitLength,
       unitLength * .1, {
+        label: 'horizontal wall',
         isStatic: true
       }
     );
@@ -173,6 +178,7 @@ verticals.forEach((row, rowIndex) => {
       rowIndex * unitLength + unitLength / 2,
       unitLength * 0.1,
       unitLength, {
+        label: 'vertical wall',
         isStatic: true
       }
     );
@@ -248,7 +254,13 @@ Events.on(engine, 'collisionStart', event => {
     const labels = ['ball', 'goal'];
 
     if (labels.includes(collision.bodyA.label) && labels.includes(collision.bodyB.label)) {
-      console.log('User won!');
+      world.gravity.y = 1;
+      world.bodies.forEach(body => {
+        if (body.label === 'vertical wall' || body.label === 'horizontal wall') {
+          Body.setStatic(body, false);
+        }
+      });
+
     }
   });
 });
