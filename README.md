@@ -1,6 +1,6 @@
 # MAZEAWAY 
 
-## A Maze Game Made 
+## A Maze Game Made For Desktop Use.
 
 ### Technologies Used
 1. HTML
