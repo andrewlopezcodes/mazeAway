@@ -15,6 +15,7 @@ const {
 const width = 600;
 const height = 600;
 const cells = 3;
+const unitLength = width / cells;
 
 
 
@@ -133,6 +134,8 @@ const stepThroughCell = (row, column) => {
     } else if (directionOfMove === 'down') {
       horizontals[row][column] = true;
     }
+
+    stepThroughCell(nextRow, nextColumn);
   }
 
 
@@ -143,6 +146,21 @@ const stepThroughCell = (row, column) => {
 
 }
 
-stepThroughCell(startRow, StartColumn);
-console.log(grid);
-console.log(horizontals);
+stepThroughCell(startRow, startColumn);
+horizontals.forEach((row, rowIndex) => {
+  row.forEach((open, columnIndex) => {
+    if (open) {
+      return;
+    }
+
+    const wall = Bodies.rectangle(
+      columnIndex * unitLength + unitLength / 2,
+      rowIndex * unitLength + unitLength,
+      unitLength,
+      unitLength * .01, {
+        isStatic: true
+      }
+    );
+    World.add(world, wall);
+  })
+})
