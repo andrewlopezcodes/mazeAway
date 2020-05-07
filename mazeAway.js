@@ -100,15 +100,15 @@ const stepThroughCell = (row, column) => {
   //assemble randomly ordered list of neighbors
 
   const neighbors = shuffleArrayNeighbors([
-    [row - 1, column],
-    [row, column + 1],
-    [row + 1, column],
-    [row, column - 1]
+    [row - 1, column, 'up'], //up
+    [row, column + 1, 'right'], //right
+    [row + 1, column, 'down'], //down
+    [row, column - 1, 'left'] // left
   ]);
   // console.log(neighbors)
   //for each neighbor.....
   for (let move of availableMoves) {
-    const [nextRow, nextColumn] = move;
+    const [nextRow, nextColumn, directionOfMove] = move;
 
     //see if that neightbor is out of bounds
     if (netRow < 0 || nextRow >= cells || nextColumn < 0 || nextColumn >= cells) {
