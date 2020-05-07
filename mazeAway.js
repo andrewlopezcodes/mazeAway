@@ -32,13 +32,6 @@ const render = Render.create({
 Render.run(render);
 Runner.run(Runner.create(), engine);
 
-
-const shape = Bodies.rectangle(200, 200, 50, 50, {
-  // isStatic: true
-});
-
-World.add(world, shape);
-
 //Border Walls
 //(x, y, width of shape, height of shape)
 
@@ -205,4 +198,19 @@ const ball = Bodies.circle(
 
 );
 
-World.add(world, ball)
+World.add(world, ball);
+
+document.addEventListener('keydown', event => {
+  if (event.keyCode === 38 || event.keyCode === 87) {
+    console.log('up'); //w
+  }
+  if (event.keyCode === 40 || event.keyCode === 90) {
+    console.log('down'); //z
+  }
+  if (event.keyCode === 39 || event.keyCode === 83) {
+    console.log('right'); //s
+  }
+  if (event.keyCode === 37 || event.keyCode === 65) {
+    console.log('left'); //a
+  }
+})
