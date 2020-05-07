@@ -14,11 +14,12 @@ const {
   world
 } = engine;
 
-
-const width = 600;
-const height = 600;
-const cells = 10;
-const unitLength = width / cells;
+const cellsHorizontal = 4;
+const cellsVertical = 3;
+const width = window.innerWidth;
+const height = window.innerHeight;
+const unitLengthX = width / cellsHorizontal;
+const unitLengthY = height / cellsVertical;
 
 
 
