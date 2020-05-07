@@ -63,6 +63,19 @@ World.add(world, borderWalls);
 grid = Array() <- The number inside the parenthesis is the number of rows for the grid
 map(()=> Array().fill()) <- The number inside the call back function Array parenthesis is the number of columns */
 
+const shuffleArrayNeighbors = (arr) => {
+  let arrayNeighbors = arr.length;
+  while (arrayNeighbors > 0) {
+    const index = Math.floor(Math.random() * arrayNeighbors);
+
+    arrayNeighbors--;
+    const temp = arr[arrayNeighbors];
+    arr[arrayNeighbors] = arr[index];
+    arr[index] = temp;
+  }
+  return arr
+}
+
 const grid = Array(cells).fill(null).map(() => Array(cells).fill(false));
 
 const verticals = Array(cells).fill(null).map(() => Array(cells - 1).fill(false));
@@ -86,12 +99,13 @@ const stepThroughCell = (row, column) => {
 
   //assemble randomly ordered list of neighbors
 
-  const neighbors = [
+  const neighbors = shuffleArrayNeighbors([
     [row - 1, column],
     [row, column + 1],
     [row + 1, column],
     [row, column - 1]
-  ];
+  ]);
+  console.log(neighbors)
   //for each neighbor.....
   //see if that neightbor is out of bounds
 
