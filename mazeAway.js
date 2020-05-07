@@ -14,8 +14,8 @@ const {
   world
 } = engine;
 
-const cellsHorizontal = 20;
-const cellsVertical = 15;
+const cellsHorizontal = 3;
+const cellsVertical = 3;
 const width = window.innerWidth;
 const height = window.innerHeight;
 const unitLengthX = width / cellsHorizontal;
@@ -269,10 +269,12 @@ Events.on(engine, 'collisionStart', event => {
     const labels = ['ball', 'goal'];
 
     if (labels.includes(collision.bodyA.label) && labels.includes(collision.bodyB.label)) {
+      document.querySelector('.winner').classList.remove('hidden');
       world.gravity.y = 1;
       world.bodies.forEach(body => {
         if (body.label === 'vertical wall' || body.label === 'horizontal wall') {
           Body.setStatic(body, false);
+
         }
       });
 
